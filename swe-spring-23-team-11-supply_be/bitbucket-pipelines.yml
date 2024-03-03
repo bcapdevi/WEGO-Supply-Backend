@@ -1,0 +1,14 @@
+image: atlassian/default-image:2
+
+pipelines:
+  branches:
+    main:
+      - step:
+          name: SupplyBE
+          deployment: Production
+          script:
+            - pipe: atlassian/ssh-run:0.2.2
+              variables:
+                SSH_USER: ${SSH_USER}
+                SERVER: ${SUPPLY_SERVER}
+                COMMAND: "./deploy_supply_be.sh"
